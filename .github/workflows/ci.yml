@@ -37,11 +37,6 @@ jobs:
         run: | 
           cd osu/osu.Desktop
           dotnet restore -p:PublishAot=true
-      
-      - name: Restore osu-framework
-        run: | 
-          cd osu-framework
-          dotnet restore -p:PublishAot=true
 
       - name: Compile
         run: |
