@@ -7,10 +7,6 @@ concurrency:
 permissions:
   contents: read # to fetch code (actions/checkout)
 
-defaults:
-  run:
-    working-directory: osu
-
 jobs:
   build-aot:
     name: Publish AoT
@@ -35,17 +31,27 @@ jobs:
           sudo apt-get install -y clang zlib1g-dev
       
       - name: Print osu! directory
-        run: echo ${{github.workspace}}/osu.Desktop/bin/Release/net7.0/linux-x64/publish
+        run: echo ${{github.workspace}}/osu/osu.Desktop/bin/Release/net7.0/linux-x64/publish
         
-      - name: Restore
-        run: dotnet restore -p:PublishAot=true
+      - name: Restore osu
+        run: | 
+          cd osu/osu.Desktop
+          dotnet restore -p:PublishAot=true
+      
+      - name: Restore osu-framework
+        run: | 
+          cd osu/osu-framework
+          dotnet restore -p:PublishAot=true
 
       - name: Compile
-        run: 
-          dotnet build -c Debug osu.Desktop.slnf
+        run: |
+          cd osu/osu.Desktop
+          dotnet build -c Debug
 
       - name: Publish
-        run: dotnet publish -c Release -r linux-x64
+        run:  |
+          cd osu/osu.Desktop 
+          dotnet publish -c Release -r linux-x64
 
       # Attempt to upload results even if test fails.
       # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#always
@@ -54,4 +60,4 @@ jobs:
         if: ${{ always() }}
         with:
           name: osu-aot-linux-x64
-          path: ${{github.workspace}}/osu.Desktop/bin/Release/net7.0/linux-x64/publish
+          path: ${{github.workspace}}/osu/osu.Desktop/bin/Release/net7.0/linux-x64/publish
