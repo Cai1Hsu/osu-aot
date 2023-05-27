@@ -28,6 +28,11 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: "7.0.x"
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang zlib1g-dev
       
       - name: Print osu! directory
         run: echo ${{github.workspace}}/osu.Desktop/bin/Release/net7.0/linux-x64/publish
