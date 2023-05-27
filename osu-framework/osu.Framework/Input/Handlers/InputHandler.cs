@@ -87,7 +87,7 @@ namespace osu.Framework.Input.Handlers
 
         public void OnValueChanged()
         {
-
+            
         }
 
         #region IDisposable Support

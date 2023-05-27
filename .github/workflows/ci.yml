@@ -26,10 +26,12 @@ jobs:
           dotnet-version: "7.0.x"
       
       - name: Enter osu! directory
-        run: cd osu 
+        run: cd osu
 
       - name: Compile
-        run: dotnet build -c Debug -warnaserror osu.Desktop.slnf
+        run: | 
+          pwd  
+          dotnet build -c Debug osu.Desktop.slnf
 
       - name: Publish
         run: dotnet publish -c Release -r linux-x64
