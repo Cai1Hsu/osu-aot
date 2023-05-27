@@ -40,7 +40,7 @@ jobs:
       
       - name: Restore osu-framework
         run: | 
-          cd osu/osu-framework
+          cd osu-framework
           dotnet restore -p:PublishAot=true
 
       - name: Compile
