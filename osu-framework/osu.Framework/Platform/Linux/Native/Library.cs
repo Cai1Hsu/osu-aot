@@ -27,6 +27,13 @@ namespace osu.Framework.Platform.Linux.Native
             string paths = (string)AppContext.GetData("NATIVE_DLL_SEARCH_DIRECTORIES");
             Debug.Assert(paths != null);
 
+            string ldPath = Environment.GetEnvironmentVariable("LD_LIBRARY_PATH");
+
+            if (ldPath != null)
+                paths += ":" + ldPath;
+
+            if (paths == null) return;
+
             foreach (string path in paths.Split(':'))
             {
                 if (dlopen(Path.Combine(path, library), flags) != IntPtr.Zero)
