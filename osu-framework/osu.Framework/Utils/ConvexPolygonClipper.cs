@@ -39,7 +39,11 @@ namespace osu.Framework.Utils
         /// </summary>
         /// <returns>A clockwise-ordered set of vertices representing the result of clipping <see cref="subjectPolygon"/> by <see cref="clipPolygon"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Span<Vector2> Clip() => Clip(new Vector2[GetClipBufferSize()]);
+        public Span<Vector2> Clip()
+        {
+            // TODO: 
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Clips <see cref="subjectPolygon"/> by <see cref="clipPolygon"/> using an intermediate buffer.

@@ -170,14 +170,14 @@ namespace osu.Game.IO
             public readonly long st_size;
             public readonly long st_blksize;
             public readonly long st_blocks;
-            public readonly timespec st_atim;
-            public readonly timespec st_mtim;
-            public readonly timespec st_ctim;
+            public readonly timeSpec st_atim;
+            public readonly timeSpec st_mtim;
+            public readonly timeSpec st_ctim;
         }
 
         // ReSharper disable once InconsistentNaming
         [StructLayout(LayoutKind.Sequential)]
-        private struct timespec
+        private struct timeSpec
         {
             public readonly long tv_sec;
             public readonly long tv_nsec;

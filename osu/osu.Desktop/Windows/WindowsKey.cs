@@ -19,7 +19,9 @@ namespace osu.Desktop.Windows
         private const int wm_syskeyup = 261;
 
         //Resharper disable once NotAccessedField.Local
+#pragma warning disable CS0414
         private static LowLevelKeyboardProcDelegate? keyboardHookDelegate; // keeping a reference alive for the GC
+#pragma warning restore CS0414
         private static IntPtr keyHook;
 
         [StructLayout(LayoutKind.Explicit)]
@@ -52,7 +54,9 @@ namespace osu.Desktop.Windows
             if (keyHook != IntPtr.Zero || isBlocked)
                 return;
 
+#pragma warning disable IL3002
             keyHook = setWindowsHookEx(wh_keyboard_ll, (keyboardHookDelegate = lowLevelKeyboardProc), Marshal.GetHINSTANCE(System.Reflection.Assembly.GetExecutingAssembly().GetModules()[0]), 0);
+#pragma warning restore IL3002
 
             isBlocked = true;
         }
