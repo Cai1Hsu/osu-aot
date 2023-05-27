@@ -36,6 +36,9 @@ jobs:
       
       - name: Print osu! directory
         run: echo ${{github.workspace}}/osu.Desktop/bin/Release/net7.0/linux-x64/publish
+        
+      - name: Restore
+        run: dotnet restore -p:PublishAot=true
 
       - name: Compile
         run: 
