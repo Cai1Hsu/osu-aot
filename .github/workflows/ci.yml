@@ -1,0 +1,44 @@
+on: [push, pull_request]
+name: Continuous Integration
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
+jobs:
+  build-aot:
+    name: Publish AoT
+    runs-on: ${{matrix.os.fullname}}
+    strategy:
+       fail-fast: false
+       matrix:
+          os:
+            - { prettyname: Linux, fullname: ubuntu-latest }
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install .NET 7.0.x
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "7.0.x"
+      
+      - name: Enter osu! directory
+        run: cd osu 
+
+      - name: Compile
+        run: dotnet build -c Debug -warnaserror osu.Desktop.slnf
+
+      - name: Publish
+        run: dotnet publish -c Release -r linux-x64
+
+      # Attempt to upload results even if test fails.
+      # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#always
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v3
+        if: ${{ always() }}
+        with:
+          name: osu-aot-linux-x64
+          path: ${{github.workspace}}/osu/osu.Desktop/bin/Release/net7.0/linux-x64/publish
