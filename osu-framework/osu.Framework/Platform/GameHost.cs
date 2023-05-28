@@ -708,6 +708,7 @@ namespace osu.Framework.Platform
 
                 ChooseAndSetupRenderer();
 
+                // FIXME 
                 initialiseInputHandlers();
 
                 // Prepare renderer (requires config).
@@ -1067,6 +1068,12 @@ namespace osu.Framework.Platform
         {
             foreach (var handler in AvailableInputHandlers)
             {
+                if (handler == null)
+                {
+                    Logger.LogPrint($"Input handler is null ({handler})");
+                    continue;
+                }
+
                 if (!handler.Initialize(this))
                     handler.Enabled.Value = false;
             }

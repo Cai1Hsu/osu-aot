@@ -38,7 +38,10 @@ namespace osu.Framework.Platform
             {
                 new KeyboardHandler(),
                 // tablet should get priority over mouse to correctly handle cases where tablet drivers report as mice as well.
-                new OpenTabletDriverHandler(),
+                
+                // FIXME: This is a hack to make the game work on Linux. 
+                // it causes reference not set to an instance of an object.
+                //new OpenTabletDriverHandler(),
                 new MouseHandler(),
                 new TouchHandler(),
                 new JoystickHandler(),
