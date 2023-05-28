@@ -32,5 +32,7 @@ namespace osu.Framework.Testing
             {
             }
         }
+
+        public override Storage CreateStorage(string path, GameHost host) => new TemporaryNativeStorage(path, host);
     }
 }

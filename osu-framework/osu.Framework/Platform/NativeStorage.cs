@@ -122,5 +122,10 @@ namespace osu.Framework.Platform
 
             return (Storage)Activator.CreateInstance(GetType(), fullPath, host);
         }
+
+        public virtual Storage CreateStorage(string path, GameHost host)
+        {
+            return new DesktopStorage(path, (DesktopGameHost)host);
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace osu.Framework.Android
             : base(path, host)
         {
         }
+
+        public override AndroidStorage CreateStorage(string path, GameHost host) => new AndroidStorage(path, host);
     }
 }

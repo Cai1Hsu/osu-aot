@@ -13,5 +13,7 @@ namespace osu.Framework.iOS
             : base(path, host)
         {
         }
+
+        public override IOSStorage CreateStorage(string path, GameHost host) => new IOSStorage(path, (IOSGameHost)host);
     }
 }
