@@ -120,7 +120,7 @@ namespace osu.Framework.Platform
             // create non-existing path.
             string fullPath = GetFullPath(path, true);
 
-            return (Storage)Activator.CreateInstance(GetType(), fullPath, host);
+            return this.CreateStorage(fullPath, host);
         }
 
         public virtual Storage CreateStorage(string path, GameHost host)

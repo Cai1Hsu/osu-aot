@@ -44,8 +44,11 @@ namespace osu.Framework.Platform
                 //new OpenTabletDriverHandler(),
                 new MouseHandler(),
                 new TouchHandler(),
-                new JoystickHandler(),
-                new MidiHandler(),
+                
+                // FIXME : Disable this for now.
+                // Our goal is to make the game run.
+                // new JoystickHandler(),
+                // new MidiHandler(),
             };
     }
 }
