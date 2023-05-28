@@ -48,14 +48,7 @@ namespace osu.Framework.Allocation
         /// </summary>
         /// <param name="instance">The instance to cache. Must be or derive from <typeparamref name="T"/>.</param>
         public void CacheAs<T>(T instance) where T : class
-        {
-            if (instance == null)
-            {
-                Logging.Logger.Log($"Attempted to cache null instance as {typeof(T).ReadableName()}.");
-                return;
-            }
-            CacheAs(instance, default);
-        }
+            => CacheAs(instance, default);
 
         /// <summary>
         /// Caches an instance of a type as a type of <typeparamref name="T"/>. This instance will be returned each time you <see cref="Get(Type)"/>.
