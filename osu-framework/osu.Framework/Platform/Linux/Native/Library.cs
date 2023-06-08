@@ -28,19 +28,19 @@ namespace osu.Framework.Platform.Linux.Native
 
             string ldPath = Environment.GetEnvironmentVariable("LD_LIBRARY_PATH");
 
-            if (ldPath != null)
-            {
-                System.Console.WriteLine("LD_LIBRARY_PATH: " + ldPath);
-                paths += ":" + ldPath;
-            }
+            if (ldPath != null) paths += ":" + ldPath;
 
             if (paths == null) return;
+
+            Console.WriteLine($"{paths} {library} {flags}");
 
             foreach (string path in paths.Split(':'))
             {
                 if (dlopen(Path.Combine(path, library), flags) != IntPtr.Zero)
-                    break;
+                    return;
             }
+
+            Console.WriteLine($"Failed to load library {library} with flags {flags}");
         }
 
         [Flags]
